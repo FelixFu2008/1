@@ -1,0 +1,151 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>11813 陳省甫 210552</title>
+  <style>
+  #face {
+    margin:50px;
+    text-align:center;
+    width:300px;
+    height:500px;
+    background:#d0f5e6;
+    border-radius:50% ;
+    box-shadow:0 0 10px 0px black ;
+  }
+  #eyebrows {
+    margin-top:-110px;
+    margin-left:200px;
+    
+  }
+  #eyes {
+    margin-bottom:10px;
+  }
+  #nose {
+    margin-top:0px;
+    margin-left:200px;
+    
+    width:0px;
+    height:10px;
+    border:solid transparent;
+    border-bottom-color:red ;
+    border-width:0px 30px 10px 10px;
+  }
+  #mouth {
+    
+    width:200px;
+    height:12px;
+    background:red;
+    margin-top:100px;
+    margin-left:100px;
+    border-radius:0 0 100px 100px;
+    border:solid black 5px;
+    
+    
+  }
+  .eyebrow {
+    
+    
+    width:50px;
+    height:10px;
+    background:black;
+  }
+  .eye {
+    display:inline-block;
+    margin-top:0px;
+    margin-left:100px;
+    position:relative;
+    width:50px;
+    height:50px;
+    background:red;
+    border-radius:50%;
+  }
+  .eyeball {
+    display:inline-block;
+    position:relative;
+    top:10px;
+    left:15px;
+    width:20px;
+    height:20px;
+    background:black;
+    border-radius:50%;
+    animation:aa 0.001s infinite linear;
+  }
+  #eyebrowL {
+    margin-top:0px;
+    margin-left:250px;
+    transform:rotate(10deg) translate(-5px,0px);
+    animation:b1 1s infinite linear;
+  }
+  #eyebrowR {
+    margin-top:0px;
+    margin-left:100px;
+    transform:rotate(-10deg) translate(5px,0px);
+    animation:b2 1s infinite linear;
+  }
+  
+  
+  #hair{
+    margin-top:-580px;
+    margin-left:20px;
+    width:350px;
+    height:200px;
+    background: linear-gradient(to right, red, yellow, green);
+    border-radius:200px 200px 100px 100px;
+    transform:rotate(0deg);
+    
+  }
+  #water{
+    margin-top:-10px;
+    margin-left:150px;
+    width:10px;
+    height:25px;
+    background: linear-gradient(to right, blue, green);
+    border-radius:0 0 100px 100px;
+    transform:rotate(0deg);
+    animation:m1 1s infinite linear;
+    
+  }
+ 
+ 
+  @keyframes aa {
+    0%{transform:translate(0px,0px);}
+    25%{transform:translate(0px,-10px);}
+    50%{transform:translate(0px,0px);}
+    75%{transform:translate(0px,10px);}
+    100%{transform:translate(0px,0px);}
+  }
+  @keyframes b1 {
+    0%{transform:rotate(10deg) translate(-5px,0px);}
+    25%{transform:rotate(10deg) translate(5px,-5px);}
+    75%{transform:rotate(10deg) translate(-5px,-5px);}
+    100%{transform:rotate(10deg) translate(5px,0px);}
+  }
+  @keyframes b2 {
+    0%{transform:rotate(10deg) translate(-5px,0px);}
+    25%{transform:rotate(10deg) translate(5px,-5px);}
+    75%{transform:rotate(10deg) translate(-5px,-5px);}
+    100%{transform:rotate(10deg) translate(5px,0px);}
+  }
+  @keyframes m1 {
+    0%{transform: translate(0px,0px);}
+    25%{transform:translate(0px,30px);}
+    75%{transform:translate(0px,70px);}
+    100%{transform: translate(0px,120px);}
+
+   
+    }
+  </style>
+</head>
+<body>
+  <div id="face"></div>
+  <div id="hair"></div>
+  <div id="eyebrowL" class="eyebrow"></div>
+  <div id="eyebrowR" class="eyebrow"></div>
+  <div class="eye"><div class="eyeball"></div></div>
+  <div class="eye"><div class="eyeball"></div></div>
+  <div id="nose"></div>
+  <div id="mouth"></div>
+  <div id="water"></div>
+  
+</body>
+</html>

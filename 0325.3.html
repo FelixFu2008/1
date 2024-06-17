@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <script>//JavaScRiPt單行註解
+      /*JaVaScRiPt
+      多行註解*/
+      function get(id) {//自訂函式
+        return document.getElementById(id);
+        
+        
+      }
+      function add(){
+        x=parseFloat(get("a1").value);
+        y=parseFloat(get("a2").value);
+       
+
+        get("ans").value=x+y;
+        
+      }
+    </script>
+  </head>
+  <body>
+    <input type="number" id="a1">+<input type="number" id="a2">
+    <button onclick="add()">=</button> <input type="number" id="ans" readonly>
+  </body>
+
+    
+    
+  
+</html>
+

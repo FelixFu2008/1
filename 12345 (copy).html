@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #board {
+     
+    }
+    #timebar {
+      
+    }
+    .target {
+      
+    }
+
+
+
+
+
+    
+  </style>
+</head>
+<body>
+  <div>得分: <span id="score">0</span>分</div>
+  <div id="timebar"></div>
+  <div id="board"></div>
+  <button onclick="gameStart();">開始</button>
+  <button onclick="gameStop();">結束</button>
+
+  <script>
+    var score = 0;
+    var tbw = 600;
+    var game_started = false;
+    var t1, t2;
+
+    function mykey(ev) {
+      ev.prevenDefault();
+      ev.target.value = ev.key;
+    }
+
+    function getRnd(min, max) {
+      
+    }
+
+    function newTarget() 
+      if (!game_started) return;
+      var board = get("board");
+      var bw = parseInt(getComputedStyle(board).width);
+      var bh = parseInt(getComputedStyle(board).height);
+
+      var a = document.createElement("div");
+      a.className = "target";
+      a.score = getRnd(1, 3);
+      var ws = [0, 50, 40, 30];
+      var aw = ws[a.score];
+      var ah = aw;
+      a.style.backgroundColor = `rgb(${getRnd(0, 255)}, ${getRnd(0, 255)}, ${getRnd(0, 255)})`;
+      a.style.width = aw + "px";
+      a.style.height = ah + "px";
+      a.style.left = getRnd(0, bw - aw) + "px";
+      a.style.top = getRnd(0, bh - ah) + "px";
+      a.addEventListener("click", hit);
+      
+      board.appendChild(a);
+    }
+
+    function hit(ev) {
+      if (!game_started) return;
+      var x = ev.target;
+      score += x.score;
+      get("score").innerHTML = score;
+      x.remove();
+      if (score > 50) {
+        clearInterval(t1);
+        t1 = setInterval(newTarget, 300);
+      }
+    }
+
+    function gameStart() {
+      game_started = true;
+      score = 0;
+      t1 = setInterval(newTarget, 500);
+      t2 = setInterval(function() {
+        tbw--;
+        get("timebar").style.width = tbw + "px";
+        get("timebar").style.background = (tbw < 100) ? "red" : "green";
+        if (tbw <= 0) gameStop();
+      }, 100);
+    }
+
+    function gameStop() {
+      game_started = false;
+      clearInterval(t1);
+      clearInterval(t2);
+      alert("恭喜你得到" + score + "分!");
+    }
+  </script>
+</body>
+</html>

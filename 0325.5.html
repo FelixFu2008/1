@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>終極密碼</title>
+    <meta charset="utf-8">
+    <script>//JavaScRiPt單行註解
+      /*JaVaScRiPt
+      多行註解*/
+      function get(x) {//自訂函式
+        return document.getElementById(x);
+      }
+      function gedRnd(min,max){
+        return Math.floor(Math.random()*(max-min+1))+min;
+      }
+
+      
+      function gameStart(){
+        get("btnStart").style.display="none";
+        min=0;max=100;
+        ans=gedRnd(min,max);
+        get("min").innerHtml=min;
+        get("max").innerHtml=max;
+        get("user").min=min;
+        get("user").max=max;
+        get("game").style.display="block";
+      }
+      function guess(){
+        user=parseInt(get("user").value);
+        if(user==ans){
+          alare("恭喜你爆了");
+          get("game").style.display="none";
+          get("btnStart").style.display="block";
+        } else if(user<ans){
+          min=user;
+          get("min").innerHtml=min;
+          get("user").min=min;
+          get("user").value="";
+        } else if(user>ans){
+          max=user;
+          get("max").innerHtml=max;
+          get("user").max=max;
+          get("user").value="";
+        }
+      }
+
+    </script>
+  </head>
+  <body>
+    <button id=btnStart" onclick="gameStart();">遊戲開始</button>
+    <div id="game" style="display:none;">
+      <span id="min">min</span> &lt;
+      <input type="number" max="100" min="0">&lt;
+      <span id=max>max</span>
+      <button onclick="guess()">猜</button>
+    </div>
+    
+
+
+
+    
+
+  </body>
+</html>
+

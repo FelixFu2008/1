@@ -1,0 +1,93 @@
+<html>
+<head>
+   <meta charset="utf8">
+   <title>CSS-漸層</title>
+   <style>/*CSS註解*/
+      div{
+        width:200px;
+        height:100px;
+        margin-bottom:10px;
+      }
+      #d1 {
+        /*linear-gradient(方向，色1，色2.......)；線性漸層
+        方向1:to top/right/botoom/left
+        方向2:0~360deg degree的意思 0是上 90是右
+
+        漸層不是一個顏色，所以不能用在color的地方。要把它當成一張圖片!
+        */
+        background: linear-gradient(90deg,red,orange,yellow,green,blue,indigo,violet);
+      }
+      #d2 {
+        background: linear-gradient(to right,
+        hsl(0deg,100%,50%), hsl(30deg,100%,50%), hsl(60deg,100%,50%),
+        hsl(90deg,100%,50%), hsl(120deg,100%,50%), hsl(150deg,100%,50%),
+        hsl(180deg,100%,50%), hsl(210deg,100%,50%), hsl(240deg,100%,50%),
+        hsl(270deg,100%,50%), hsl(300deg,100%,50%),hsl(330deg,100%,50%)); 
+      }
+      #d3 {
+        background: linear-gradient(to bottom,
+        hsl(0deg,0%,50%),hsl(0deg,10%,50%),hsl(0deg,20%,50%),
+        hsl(0deg,30%,50%),hsl(0deg,40%,50%),hsl(0deg,50%,50%),
+        hsl(0deg,60%,50%),hsl(0deg,70%,50%),hsl(0deg,80%,50%),
+        hsl(0deg,90%,50%),hsl(0deg,100%,50%)); 
+      }
+      
+      #d4 {
+        background: linear-gradient(90deg,red 35%,white 35%,white 65%,red 65%);
+      }
+      #d5 {
+        background: repeating-linear-gradient(90deg,red 20%,white 20%,red 20% );
+      }
+      #d6 {
+        background: repeating-linear-gradient(135deg,red 20%,white 20%,green 20%,white 40%,green 40%,white 60%,red 60% );
+        }
+      /* radial-gradient()；輻射漸層，意思是由圓心向圓周漸層 */
+      #r1 {
+        background: radial-gradient(circle,yellow 2%,white,black);
+      }
+      #r2 {
+        background: radial-gradient(circle,yellow,white 30%,black);
+      }
+      #r3 {
+        background: repeating-radial-gradient(circle,gray 25%,white 35%,gray  45%);
+      }
+
+      /* conic-gradient();圓錐漸層意思是繞著圓心漸層一圈 */    
+    #c1 {
+      background: conic-gradient(red,green,blue,red);
+    }
+    #c2 {
+      background: repeating-conic-gradient(red 10%,white 18%,red 20%);
+    }
+
+    @keyframes kc2 {
+      0% {background:repenting-conic-gradient(red 10%,white 15%,red 20%);}
+      50% {background:repenting-conic-gradient(red 10%,white 15%,red 20%);}
+      100% {background:repenting-conic-gradient(red 10%,white 15%,red 20%);}
+    }
+    #ac2 {
+      animation:kc2 0.5s linear infinite;
+      /*0.5秒一次，linear是速度，infinite是無限  **名 一次多久 速度 次數** */
+      display:inline-block;
+    }
+     
+  </style>  
+</head>
+<body>
+  <div id="d1"></div>
+  <div id="d2"></div>
+  <div id="d3"></div>
+  <div id="d4"></div>
+  <div id="d5"></div>
+  <div id="d6"></div>
+
+  <div id="r1"></div>
+  <div id="r2"></div>
+  <div id="r3"></div>
+
+  <div id="c1"></div>
+  <div id="c2"></div>
+
+
+</body>
+</html>

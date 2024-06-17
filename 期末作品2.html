@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>期末作品</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #gameArea {
+            width: 100vw;
+            height: 100vh;
+            background-color: skyblue;
+            position: relative;
+            overflow: hidden;
+        }
+        #player {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            background-image: url('role1.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .obstacle {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            position: absolute;
+            bottom: 50px;
+            animation: moveLeft 5s linear infinite;
+        }
+        @keyframes moveLeft {
+            0% {
+                left: 100vw;
+            }
+            100% {
+                left: -50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="gameArea">
+        <div id="player"></div>
+    </div>
+    <script>
+        let player = document.getElementById('player');
+        let gameArea = document.getElementById('gameArea');
+        let isJumping = false;
+        let gravity = 0.9;
+        let jumpHeight = 150;
+
+        function jump() {
+            if (isJumping) return;
+            let position = parseInt(window.getComputedStyle(player).getPropertyValue('bottom'));
+            isJumping = true;
+            let timerId = setInterval(function () {
+                if (position >= jumpHeight) {
+                    clearInterval(timerId);
+                    let downTimerId = setInterval(function () {
+                        if (position <= 50) {
+                            clearInterval(downTimerId);
+                            isJumping = false;
+                        }
+                        position -= 5;
+                        position = position * gravity;
+                        player.style.bottom = position + 'px';
+                    }, 20);
+                }
+                position += 30;
+                position = position * gravity;
+                player.style.bottom = position + 'px';
+            }, 20);
+        }
+
+        function createObstacle() {
+            let obstacle = document.createElement('div');
+            obstacle.classList.add('obstacle');
+            gameArea.appendChild(obstacle);
+
+            let timerId = setTimeout(function () {
+                gameArea.removeChild(obstacle);
+            }, 5000);
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'w') {
+                jump();
+            }
+        });
+
+        setInterval(createObstacle, 2000);
+    </script>
+</body>
+</html>

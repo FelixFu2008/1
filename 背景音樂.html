@@ -1,0 +1,34 @@
+<html>
+  <head>
+     <script>
+       function get(id) {
+         return document.getElementById(id);
+       }
+       function playbgm(){
+         get("bgm").play();
+       }
+       function gameStart() {
+         get("bgm").pause();
+       }
+        </script>
+   
+       
+
+
+    
+
+  </head>
+  <body>
+    <audio controls loop>
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    <button onclick="playbgm()">播放</button>
+    <button onclick="pausebgm()">停止</button>
+    
+
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,40 @@
+<html>
+
+
+  <head>
+    <script>//倒數時間條
+    function get(id){
+      return document.getElementById(id);
+    } 
+    function getRnd(min,max){
+    return Math.floor(Math.random()*(max-min+1))+min;
+    } 
+    
+    function start_timer(){
+      time=0;
+      /*setTimeout(function(){//匿名函式
+        alart("時間到");
+      },3000);*/
+      t1=setInterval(function(){
+        time=time+1;
+        sec=Math.floor(time/100);
+
+        get("time").innerHTML=time;
+      },10);
+
+
+
+      
+    
+      
+    </script>
+  </head>
+  <body>
+    <div>時間:<span id="time">00'00</span></div>
+    <button onclick="start_timer()">開始計時</button>"
+    <button onclick="stop_timer()">停止計時</button>
+
+    
+  </body>
+</html>
+
