@@ -70,13 +70,14 @@
                         position -= 5;
                         position = position * gravity;
                         player.style.bottom = position + 'px';
-                    }, 20);
+                    }, 150);
                 }
                 position += 30;
                 position = position * gravity;
                 player.style.bottom = position + 'px';
-            }, 20);
+            }, 50);
         }
+        
 
         function createObstacle() {
             let obstacle = document.createElement('div');

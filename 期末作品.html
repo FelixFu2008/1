@@ -1,81 +1,139 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>期末作品</title>
-    <meta charset="utf-8">
     <style>
-      #grassland{
-        width:2000px;
-        height:1000px;
-        top:-140px;
-        left:-200px;
-        position:absolute ;
-        z-index: 1;
-        animation: gm 5s linear infinite ;
+        body {
+            margin: 0;
+            overflow: hidden;
         }
-      @keyframes gm {
-        0% {
-          transform:translateX(0px);
+        #gameArea {
+            width: 100vw;
+            height: 100vh;
+            background-color: skyblue;
+            position: relative;
+            overflow: hidden;
         }
-        100% {
-        transform:translateX(-1000px);
+        #player {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            background-image: url('role1.png');
+            background-size: cover;
+            background-repeat: no-repeat;
         }
-        
-      }
-      #r1{
-        width:80px;
-        height:80px;
-
-        position:absolute;
-        z-index: 2;
-        top:370px;
-        left:50px;
-
-      }
-      
-
+        .obstacle {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            position: absolute;
+            bottom: 50px;
+            animation: moveLeft 5s linear infinite;
+        }
+        @keyframes moveLeft {
+            0% {
+                left: 100vw;
+            }
+            100% {
+                left: -50px;
+            }
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            color: white;
+        }
     </style>
+</head>
+<body>
+    <div id="score">Score: 0</div>
+    <div id="gameArea">
+        <div id="player"></div>
+    </div>
     <script>
-      var grassland
-      var r1;
-      var jh=100;//jumphight
-      
-      document.addEventListener("keydown",function(event){
-        if(event.key==='w'){
-          r1.style.top=(parseInt(r1.style.top)-jh+"px");
+        let player = document.getElementById('player');
+        let gameArea = document.getElementById('gameArea');
+        let scoreElement = document.getElementById('score');
+        let isJumping = false;
+        let gravity = 0.9;
+        let jumpHeight = 150;
+        let score = 0;
+        let gameInterval;
+        let createObstacleInterval;
+        let collisionInterval;
+
+        function jump() {
+            if (isJumping) return;
+            let position = parseInt(window.getComputedStyle(player).getPropertyValue('bottom'));
+            isJumping = true;
+            let timerId = setInterval(function () {
+                if (position >= jumpHeight) {
+                    clearInterval(timerId);
+                    let downTimerId = setInterval(function () {
+                        if (position <= 50) {
+                            clearInterval(downTimerId);
+                            isJumping = false;
+                        }
+                        position -= 10;
+                        position = position * gravity;
+                        player.style.bottom = position + 'px';
+                    }, 250);
+                }
+                position += 30;
+                position = position * gravity;
+                player.style.bottom = position + 'px';
+            }, 10);
         }
-      })
-      
-      
-      function get(id) {
-        return document.getElementById(id);
-      }
-      function getRnd(min, max){
-        return Math.floor(Math.random()*(max-min+1))+min;
-      }
-      function gameStart() {
-        
 
-      }
-      function gameInit(){
+        function createObstacle() {
+            let obstacle = document.createElement('div');
+            obstacle.classList.add('obstacle');
+            gameArea.appendChild(obstacle);
 
+            let timerId = setTimeout(function () {
+                gameArea.removeChild(obstacle);
+            }, 5000);
+        }
 
-      }
+        function checkCollision() {
+            let playerRect = player.getBoundingClientRect();
+            let obstacles = document.getElementsByClassName('obstacle');
+            for (let i = 0; i < obstacles.length; i++) {
+                let obstacleRect = obstacles[i].getBoundingClientRect();
+                if (playerRect.left < obstacleRect.right &&
+                    playerRect.right > obstacleRect.left &&
+                    playerRect.top < obstacleRect.bottom &&
+                    playerRect.bottom > obstacleRect.top) {
+                    gameOver();
+                }
+            }
+        }
 
+        function gameOver() {
+            clearInterval(createObstacleInterval);
+            clearInterval(collisionInterval);
+            clearInterval(scoreInterval);
+            alert('Game Over. Your score is: ' + score);
+        }
 
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'w') {
+                jump();
+            }
+        });
+
+        createObstacleInterval = setInterval(createObstacle, 2000);
+        collisionInterval = setInterval(checkCollision, 20);
+        let scoreInterval = setInterval(function() {
+            score++;
+            scoreElement.textContent = 'Score: ' + score;
+        }, 1000);
     </script>
-
-  </head>
-  <body>
-    <img id=grassland src="grass.jpg" alt=草地>
-    
-
-    <img id=r1 src="role1.png" alt=主角1>
-    
-    
-
-
-
-
-  </body>
-
+</body>
 </html>

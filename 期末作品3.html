@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title>期末作品</title>
+    <meta charset="utf-8">
+    <style>
+      #grassland{
+        width:2000px;
+        height:1000px;
+        top:-140px;
+        left:-200px;
+        position:absolute ;
+        z-index: 1;
+        animation: gm 5s linear infinite ;
+        }
+      @keyframes gm {
+        0% {
+          transform:translateX(0px);
+        }
+        100% {
+        transform:translateX(-1000px);
+        }
+        
+      }
+      #r1{
+        width:80px;
+        height:80px;
+
+        position:absolute;
+        z-index: 2;
+        top:370px;
+        left:50px;
+
+      }
+      
+
+    </style>
+    <script>
+      var grassland
+      var r1;
+      var jh=100;//jumphight
+      
+      document.addEventListener("keydown",function(event){
+        if(event.key==='w'){
+          r1.style.top=(parseInt(r1.style.top)-jh+"px");
+        }
+      })
+      
+      
+      function get(id) {
+        return document.getElementById(id);
+      }
+      function getRnd(min, max){
+        return Math.floor(Math.random()*(max-min+1))+min;
+      }
+      function gameStart() {
+        
+
+      }
+      function gameInit(){
+
+
+      }
+
+
+    </script>
+
+  </head>
+  <body>
+    <img id=grassland src="grass.jpg" alt=草地>
+    
+
+    <img id=r1 src="role1.png" alt=主角1>
+    
+    
+
+
+
+
+  </body>
+
+</html>
